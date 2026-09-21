@@ -13,7 +13,7 @@ WORKSPACE = {
     "name": "TelyClaw 增长引擎",
     "last_sync": "刚刚同步",
     "sync_interval": "每 4 小时自动更新",
-    "next_sync": "3 小时 42 分后",
+    "next_sync": "实时同步中…",
 }
 
 NORTH_STAR_METRIC = {
