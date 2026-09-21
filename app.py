@@ -305,6 +305,7 @@ TREND_SETS = {
             "AI 的下一代界面，可能不是一个更聪明的聊天框。\n\n而是一段不需要等待的实时对话。\n\n当语音 Agent 的响应延迟接近人类交流节奏，客服、销售和陪伴型产品都会被重新设计。\n\n真正的拐点不是“能说话”，而是“对话不再让人出戏”。",
             ["#VoiceAI", "#AIAgents", "#Realtime"],
             [angle("数据驱动", "用 320ms 延迟数据解释实时语音为何跨过可用性门槛。"), angle("体验反转", "从用户讨厌等待切入，强调自然对话的产品体验。"), angle("行业预测", "预测客服、销售与陪伴产品将首先被重构。")],
+            score_factors={"velocity": 99, "relevance": 92, "content_opportunity": 88},
         ),
         make_trend(
             "1h-browser-agents", "Browser-native Agents 开始代替重复操作", "浏览器内智能体从演示进入可复用的真实任务执行。",
@@ -314,6 +315,7 @@ TREND_SETS = {
             "浏览器正在从信息入口，变成 Agent 的工作台。\n\n真正有价值的不是自动点击，而是能理解目标、处理中断，并把关键决定交还给人。\n\n下一批 AI 产品，会更像同事，而不是快捷键。",
             ["#BrowserAgents", "#Automation", "#FutureOfWork"],
             [angle("工作流拆解", "展示 Agent 如何把多步网页操作压缩为一次委派。"), angle("风险边界", "讨论自动化执行中权限、确认与审计的重要性。"), angle("产品机会", "列举最适合 Browser Agent 的三个高频场景。")],
+            score_factors={"velocity": 94, "relevance": 98, "content_opportunity": 91},
         ),
         make_trend(
             "1h-context-memory", "Long-term Memory 成为 Agent 新战场", "持续记忆让 Agent 从一次性工具转向长期协作伙伴。",
@@ -323,6 +325,7 @@ TREND_SETS = {
             "当 AI 记得你的偏好、项目和上一次决定，产品关系就发生了变化。\n\n但记忆越强，用户越需要看得见、改得掉、随时能清空。\n\n长期记忆的护城河，最终会是信任。",
             ["#AIMemory", "#Agents", "#Privacy"],
             [angle("信任视角", "把记忆能力与用户控制权放在同一框架讨论。"), angle("产品设计", "提出可查看、可编辑、可清空的记忆 UX 原则。"), angle("长期关系", "解释记忆如何改变 SaaS 留存与用户关系。")],
+            score_factors={"velocity": 86, "relevance": 89, "content_opportunity": 99},
         ),
     ],
     "4h": [
@@ -366,6 +369,7 @@ TREND_SETS = {
             "AI Coding 的真正拐点，不是补全更快。\n\n而是你可以交出一个 Issue，等待一个经过验证的结果。\n\n从 autocomplete 到 delegation，工程师的核心能力也从写每一行代码，变成定义问题与验收结果。",
             ["#CodingAgents", "#DeveloperTools", "#Engineering"],
             [angle("角色变化", "讨论工程师从编码者到任务设计与验收者的转变。"), angle("效率数据", "用完整 Issue 委派案例量化节省的开发时间。"), angle("实践指南", "给出适合委派给 Coding Agent 的任务清单。")],
+            score_factors={"velocity": 98, "relevance": 91, "content_opportunity": 88},
         ),
         make_trend(
             "24h-mcp-ecosystem", "MCP 正在成为 AI 工具连接层", "标准化工具协议让 Agent 接入企业数据和业务系统的成本下降。",
@@ -375,6 +379,7 @@ TREND_SETS = {
             "Agent 的能力上限，不只取决于模型。\n\n它还取决于能否安全、稳定地连接真实工具。\n\n当连接协议标准化，团队终于可以把精力从重复集成，转回真正的业务工作流。",
             ["#MCP", "#AIAgents", "#DeveloperExperience"],
             [angle("生态数据", "从 38 个新连接器展示协议网络效应。"), angle("开发痛点", "解释标准协议如何减少重复集成工作。"), angle("企业落地", "聚焦权限、审计和内部系统连接。")],
+            score_factors={"velocity": 90, "relevance": 99, "content_opportunity": 93},
         ),
         make_trend(
             "24h-ai-evals", "Evals 成为 AI 产品的新 CI", "团队用持续评测替代发布前的主观试玩。",
@@ -384,6 +389,7 @@ TREND_SETS = {
             "没有 Evals 的 AI 产品，就像没有测试的代码。\n\nDemo 可以证明它偶尔有效；持续评测才能证明它在真实边界条件下依然可靠。\n\n把失败样本变成发布门槛，才是可持续的 AI 迭代。",
             ["#AIEvals", "#LLMOps", "#ProductQuality"],
             [angle("工程类比", "用 CI/CD 类比解释持续评测的必要性。"), angle("失败样本", "强调从真实失败中建立评测集。"), angle("落地清单", "给团队一套最小可用 Evals 流程。")],
+            score_factors={"velocity": 82, "relevance": 86, "content_opportunity": 100},
         ),
     ],
     "3d": [
@@ -395,6 +401,7 @@ TREND_SETS = {
             "早期产品最稀缺的，往往不是功能，而是可信的分发。\n\n创始人亲自解释问题、取舍和结果，正在成为品牌无法复制的增长渠道。\n\nDistribution is becoming a founder skill. 不只是市场团队的任务。",
             ["#FounderLedGrowth", "#Distribution", "#SaaS"],
             [angle("数据论证", "对比创始人与品牌账号的三日互动表现。"), angle("能力模型", "把分发重新定义为创始人的核心技能。"), angle("内容框架", "给出问题—取舍—结果的创始人发帖模板。")],
+            score_factors={"velocity": 97, "relevance": 95, "content_opportunity": 87},
         ),
         make_trend(
             "3d-vertical-ai", "Vertical AI 从 Copilot 走向系统级产品", "垂直 AI 正在深入行业工作流，不再停留在通用助手层。",
@@ -404,6 +411,7 @@ TREND_SETS = {
             "Vertical AI 的机会，不是给每个行业套一个聊天框。\n\n真正的价值来自理解行业数据、审批路径与责任边界，并把模型嵌进完整工作流。\n\n越深入流程，越难被通用产品替代。",
             ["#VerticalAI", "#B2BSaaS", "#Workflow"],
             [angle("行业地图", "比较医疗、法律与销售三类垂直机会。"), angle("护城河", "解释流程深度为何比模型差异更持久。"), angle("反聊天框", "挑战简单套壳，强调系统级产品设计。")],
+            score_factors={"velocity": 89, "relevance": 99, "content_opportunity": 92},
         ),
         make_trend(
             "3d-human-ai-teams", "Human + AI Team Design 成为管理议题", "企业开始讨论如何设计人机协作职责，而不只是采购更多 AI 工具。",
@@ -413,6 +421,7 @@ TREND_SETS = {
             "部署 AI 工具，不等于拥有 AI 团队。\n\n真正需要被设计的是职责：AI 做哪些执行，人在哪些节点判断，失败由谁发现。\n\n未来的组织设计，会同时包含人和 Agent。",
             ["#FutureOfWork", "#Management", "#AIAgents"],
             [angle("组织设计", "讨论人和 Agent 的职责边界。"), angle("管理清单", "给管理者一套人机工作流检查问题。"), angle("失败机制", "从异常发现与责任归属切入。")],
+            score_factors={"velocity": 80, "relevance": 88, "content_opportunity": 100},
         ),
     ],
     "7d": [
@@ -424,6 +433,7 @@ TREND_SETS = {
             "Agent 生态正在重演云原生早期的路径：模型之上，工具、记忆、评测和可观察性快速分层。\n\n开放技术栈会加速试错，也会让真正的产品差异回到工作流和用户体验。",
             ["#OpenSource", "#AgentStack", "#DeveloperTools"],
             [angle("生态全景", "拆解 Agent Stack 的关键技术层。"), angle("开源数据", "用 64 个项目的增长展示开发者动量。"), angle("产品差异", "讨论基础设施标准化后，产品护城河在哪里。")],
+            score_factors={"velocity": 98, "relevance": 90, "content_opportunity": 86},
         ),
         make_trend(
             "7d-small-model-economics", "Small Model Economics 改写 AI SaaS 毛利", "一周数据表明，模型路由与垂直小模型开始显著改善单位经济模型。",
@@ -433,6 +443,7 @@ TREND_SETS = {
             "AI SaaS 的毛利，不只由定价决定。\n\n当团队开始按任务路由模型，用更小、更专注的模型处理高频请求，成本结构就会发生根本变化。\n\n模型选择，正在成为商业模式设计。",
             ["#SmallModels", "#SaaSEconomics", "#AIInfrastructure"],
             [angle("单位经济", "用 61% 成本下降拆解毛利改善空间。"), angle("技术策略", "介绍按任务难度进行模型路由。"), angle("创始人财务", "从 runway 与定价角度讨论模型选择。")],
+            score_factors={"velocity": 88, "relevance": 99, "content_opportunity": 92},
         ),
         make_trend(
             "7d-trust-layer", "Trust Layer 成为 AI 产品必备层", "权限、审计、引用和人工确认成为企业 AI 落地的共同要求。",
@@ -442,6 +453,7 @@ TREND_SETS = {
             "企业不会因为 AI 更聪明就完全信任它。\n\n信任来自可解释的来源、清晰的权限、完整的审计，以及在关键动作前让人确认。\n\nTrust layer 不是合规附件，而是产品能力。",
             ["#AITrust", "#EnterpriseAI", "#HumanInTheLoop"],
             [angle("采购视角", "解释企业客户真正担心的四类风险。"), angle("产品架构", "拆解引用、权限、审计和确认四层。"), angle("信任转化", "说明 Trust Layer 如何缩短企业销售周期。")],
+            score_factors={"velocity": 79, "relevance": 91, "content_opportunity": 100},
         ),
     ],
 }
