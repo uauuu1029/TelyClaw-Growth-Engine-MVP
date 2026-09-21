@@ -1,0 +1,46 @@
+{
+  "description": "TelyClaw MVP fixture manifest. Runtime trend records are defined in app.py and served by /api/trends?window=<key>.",
+  "sync_interval_hours": 4,
+  "supported_windows": {
+    "1h": "最近1小时内",
+    "4h": "最近4小时内",
+    "24h": "最近24小时内",
+    "3d": "最近三天内",
+    "7d": "最近七天内"
+  },
+  "monitored_accounts": ["@OpenAI", "@sama", "@ycombinator", "@levelsio", "@karpathy", "@paulg"],
+  "account_schema": ["name", "handle", "followers", "niche_tags", "posts_24h", "last_active", "status"],
+  "sync_activity_schema": ["time", "lead", "account", "message", "icon", "tone"],
+  "north_star_metric": {
+    "name": "Avg. Qualified Engagement / Post",
+    "label": "单篇热点推文平均有效互动",
+    "value": 1240,
+    "trend_percent": 18,
+    "breakdown": {
+      "replies": 320,
+      "reposts": 230,
+      "bookmarks": 280,
+      "profile_visits": 260,
+      "product_clicks": 150
+    }
+  },
+  "supporting_metrics": [
+    {"name": "Trend Detection Lead Time", "label": "热点发现提前量", "value": "2.5 小时", "context": "平均比全网舆情爆发提前发现"},
+    {"name": "Trend to Content Time", "label": "热点到内容的转化时长", "value": "4.2 分钟", "context": "极速生成，优于 < 5-10 min 的设定目标"},
+    {"name": "Trend Hit Rate", "label": "热点命中率", "value": "92%", "context": "Top Trends 中真正被确认值得参与的比例"},
+    {"name": "Content Acceptance Rate", "label": "内容直接采用率", "value": "85%", "context": "AI 生成草稿无需大幅修改即可发布的比例"},
+    {"name": "Engagement Lift", "label": "互动提升率", "value": "+315%", "context": "相对常规普通内容的额外 Engagement 增长"},
+    {"name": "Qualified Engagement", "label": "有效互动总量", "value": "12.4k", "suffix": "/ 月", "context": "由系统趋势内容带来的总体高质量互动"}
+  ],
+  "trend_schema": ["topic", "score", "velocity_score", "relevance_score", "opportunity_score", "engagement_score", "independent_accounts_count", "freshness_index", "ranking_reason", "source_post_count", "source_posts", "content_angles", "drafts", "status"],
+  "minimum_content_angles": 3,
+  "drafts_per_trend": 3,
+  "content_angle_schema": ["Hot Take / Opinion", "Educational / Insight", "TelyClaw Product Angle"],
+  "draft_formula": ["Trend｜趋势现象", "TelyClaw Perspective｜品牌视角", "Original Insight｜独家洞察"],
+  "opportunity_score_model": {
+    "velocity": 0.30,
+    "relevance": 0.50,
+    "content_opportunity": 0.20
+  },
+  "draft_statuses": ["pending", "approved", "rejected"]
+}

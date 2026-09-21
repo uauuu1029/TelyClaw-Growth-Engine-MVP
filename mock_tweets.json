@@ -1,0 +1,26 @@
+[
+  {
+    "id": "tw_001",
+    "author": "@ai_builder",
+    "text": "Trend radar on: Just shipped a local-first AI agent that drafts social posts from trending threads. We score first, then draft, then ship with a human checkpoint. #TelyClaw",
+    "likes": 842,
+    "retweets": 196,
+    "hours_ago": 2
+  },
+  {
+    "id": "tw_002",
+    "author": "@promptlab",
+    "text": "What creators actually need from AI tools: Hot take: most AI writing tools fail because they skip trend scoring. If a post doesn't resonate, the AI draft is useless. TelyClaw turns hotspot tweets into ready-to-post copy. #TelyClaw",
+    "likes": 1260,
+    "retweets": 310,
+    "hours_ago": 12
+  },
+  {
+    "id": "tw_003",
+    "author": "@tech_guru",
+    "text": "Automating my workflow: trying out new tools to monitor crypto trends. If you're not using AI to parse the noise, you're falling behind.",
+    "likes": 340,
+    "retweets": 45,
+    "hours_ago": 48
+  }
+]
