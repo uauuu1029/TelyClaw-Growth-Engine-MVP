@@ -203,7 +203,7 @@
     };
     const heatClasses = {surging:'bg-rose-50 text-rose-600',hot:'bg-orange-50 text-orange-600',rising:'bg-amber-50 text-amber-700',steady:'bg-sky-50 text-sky-700',watch:'bg-slate-100 text-slate-600'};
     const palette = ['#076b4d','#2563eb','#7c3aed','#c2410c','#be123c','#0f766e'];
-    const state = { data:null, trendWindows:{}, accounts:[], syncActivity:[], savedDrafts:{}, selectedId:null, currentView:'overview', timeWindowKey:'4h', timeRange:'最近4小时内', trendSort:'relevance', expandedTrendId:null, activeDrafts:{}, draftEdits:{}, saveTimer:null, trendsLoading:false };
+    const state = { data:null, currentData:[], trendWindows:{}, accounts:[], syncActivity:[], savedDrafts:{}, selectedId:null, currentView:'overview', timeWindowKey:'4h', timeRange:'最近4小时内', trendSort:'relevance', expandedTrendId:null, activeDrafts:{}, draftEdits:{}, saveTimer:null, trendsLoading:false };
     const STATIC_STORAGE_KEY='telyclaw-static-mvp-v1';
     const cloneData=value=>JSON.parse(JSON.stringify(value));
     function readStaticStore(){try{return JSON.parse(localStorage.getItem(STATIC_STORAGE_KEY)||'{}')}catch{return {}}}
@@ -290,15 +290,18 @@
       });
     }
 
-    function currentWindowTrends(){
-      return state.trendWindows[state.timeWindowKey]?.trends || state.data?.trends || [];
+    function sortCurrentData(dimension,shouldRender=true){
+      const sort=trendSortMeta[dimension];
+      if(!sort)return;
+      state.trendSort=dimension;
+      state.currentData=[...(state.currentData||[])].sort((a,b)=>(b[sort.field]??0)-(a[sort.field]??0)||b.score-a.score);
+      if(state.data)state.data.trends=state.currentData;
+      if(shouldRender)renderTrends();
     }
 
     function renderTrends(){
-      const sort=trendSortMeta[state.trendSort]||trendSortMeta.relevance;
-      const currentTrends=currentWindowTrends();
-      const ranked=[...currentTrends].sort((a,b)=>(b[sort.field]??0)-(a[sort.field]??0)||b.score-a.score);
-      $('#rangeCaption').textContent=`正在展示${state.timeRange}的 ${currentTrends.length} 条趋势信号`;
+      const ranked=state.currentData||[];
+      $('#rangeCaption').textContent=`正在展示${state.timeRange}的 ${ranked.length} 条趋势信号`;
       $('#trendsList').innerHTML=ranked.map(trend=>{
         const expanded=state.expandedTrendId===trend.id;
         const dimensions=[
@@ -369,19 +372,19 @@
       const activePayload=state.trendWindows[state.timeWindowKey];
       if(activePayload){data.trends=activePayload.trends;data.window=activePayload.window;data.window_label=activePayload.window_label;data.total_source_posts=activePayload.total_source_posts}
       else{applySavedDrafts(data.trends);data.trends.forEach(prepareDrafts)}
-      state.data=data; state.timeRange=data.window_label||'最近4小时内'; $('#timeRange').value=state.timeWindowKey; state.accounts=Array.isArray(stored.accounts)?stored.accounts:cloneData(data.accounts); state.syncActivity=Array.isArray(stored.syncActivity)?stored.syncActivity:cloneData(data.sync_activity||[]); state.selectedId=data.trends.some(item=>item.id===state.selectedId)?state.selectedId:data.trends[0].id; if(!data.trends.some(item=>item.id===state.expandedTrendId))state.expandedTrendId=null; $('#nextSync').textContent='实时同步中…'; renderAccounts(); renderTrends(); renderContent(); switchView(state.currentView,false); $('#refreshBtn i')?.classList.remove('animate-spin'); if(showSuccess)showToast('内联趋势信号已刷新。');
+      state.data=data; state.currentData=[...data.trends]; sortCurrentData(state.trendSort,false); state.timeRange=data.window_label||'最近4小时内'; $('#timeRange').value=state.timeWindowKey; state.accounts=Array.isArray(stored.accounts)?stored.accounts:cloneData(data.accounts); state.syncActivity=Array.isArray(stored.syncActivity)?stored.syncActivity:cloneData(data.sync_activity||[]); state.selectedId=state.currentData.some(item=>item.id===state.selectedId)?state.selectedId:state.currentData[0].id; if(!state.currentData.some(item=>item.id===state.expandedTrendId))state.expandedTrendId=null; $('#nextSync').textContent='实时同步中…'; renderAccounts(); renderTrends(); renderContent(); switchView(state.currentView,false); $('#refreshBtn i')?.classList.remove('animate-spin'); if(showSuccess)showToast('内联趋势信号已刷新。');
     }
 
     function loadTrendWindow(windowKey,showSuccess=true){
       if(state.trendsLoading)return; state.trendsLoading=true; $('#timeRange').disabled=true; $('#rangeCaption').textContent='正在加载新的趋势排名…';
       const source=state.trendWindows[windowKey]||mockData.trendWindows[windowKey];
       if(!source){$('#timeRange').value=state.timeWindowKey;state.trendsLoading=false;$('#timeRange').disabled=false;showToast('不支持该时间范围。','error');return}
-      const payload=cloneData(source); applySavedDrafts(payload.trends); state.timeWindowKey=payload.window; state.timeRange=payload.window_label; state.trendWindows[payload.window]=payload; state.data.trends=payload.trends; state.data.window=payload.window; state.data.window_label=payload.window_label; state.data.total_source_posts=payload.total_source_posts; state.selectedId=payload.trends[0].id; state.expandedTrendId=null; payload.trends.forEach(prepareDrafts); renderOverview(); renderTrends(); renderContent(); if(showSuccess)showToast(`已加载${payload.window_label}的 ${payload.trends.length} 条趋势。`); state.trendsLoading=false;$('#timeRange').disabled=false;renderIcons();
+      const payload=cloneData(source); applySavedDrafts(payload.trends); state.timeWindowKey=payload.window; state.timeRange=payload.window_label; state.trendWindows[payload.window]=payload; state.currentData=[...payload.trends]; state.data.window=payload.window; state.data.window_label=payload.window_label; state.data.total_source_posts=payload.total_source_posts; payload.trends.forEach(prepareDrafts); sortCurrentData(state.trendSort,false); state.selectedId=state.currentData[0].id; state.expandedTrendId=null; renderOverview(); renderTrends(); renderContent(); if(showSuccess)showToast(`已加载${payload.window_label}的 ${state.currentData.length} 条趋势。`); state.trendsLoading=false;$('#timeRange').disabled=false;renderIcons();
     }
 
     document.addEventListener('click',event=>{
       const viewButton=event.target.closest('[data-view-target]'); if(viewButton){switchView(viewButton.dataset.viewTarget);return}
-      const sortButton=event.target.closest('[data-sort-dimension]'); if(sortButton){const dimension=sortButton.dataset.sortDimension;if(trendSortMeta[dimension]&&dimension!==state.trendSort){state.trendSort=dimension;renderTrends()}return}
+      const sortButton=event.target.closest('[data-sort-dimension]'); if(sortButton){sortCurrentData(sortButton.dataset.sortDimension);return}
       const trendToggle=event.target.closest('[data-trend-toggle]'); if(trendToggle){const trendId=trendToggle.dataset.trendToggle;state.expandedTrendId=state.expandedTrendId===trendId?null:trendId;renderTrends();return}
       const openTrend=event.target.closest('[data-open-trend]'); if(openTrend){state.selectedId=openTrend.dataset.openTrend;switchView('content');return}
       const topic=event.target.closest('[data-topic-id]'); if(topic){state.selectedId=topic.dataset.topicId;renderContent();return}
